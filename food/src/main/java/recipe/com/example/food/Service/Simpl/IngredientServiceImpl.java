@@ -19,8 +19,8 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public Ingredient addIngredients(Ingredient ingredient) throws IngredientAlreadyExistsException{
-		Optional<Ingredient> optional = ingredientRepository.
-				findByIngredientId(ingredient.getIngredientId());
+		Optional<Ingredient> optional = ingredientRepository.findById
+				(ingredient.getIngredientId());
 		try {
 			if(optional.isPresent()) {
 				throw new IngredientAlreadyExistsException("ingredient already exists");
@@ -37,8 +37,8 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public Ingredient updateIngredients(Integer ingredientId, Ingredient ingredient) throws IngredientIdNotFoundException {
-		Optional<Ingredient> optional = ingredientRepository.
-				findByIngredientId(ingredientId);
+		Optional<Ingredient> optional = ingredientRepository.findById
+				(ingredientId);
 		if(optional.isPresent()){
 			Ingredient temp = optional.get();
 			temp.setIngredient(ingredient.getIngredient());
@@ -56,8 +56,8 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public Ingredient getIngredient(Integer ingredientId) throws IngredientIdNotFoundException {
-		Optional<Ingredient> optional = ingredientRepository.
-				findByIngredientId(ingredientId);
+		Optional<Ingredient> optional = ingredientRepository.findById
+				(ingredientId);
 		if(optional.isEmpty()) {
 			throw new IngredientIdNotFoundException("no ingredient present with this ingredient Id");
 		}

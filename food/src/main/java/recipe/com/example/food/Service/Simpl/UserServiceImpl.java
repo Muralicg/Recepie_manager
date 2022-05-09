@@ -2,6 +2,7 @@ package recipe.com.example.food.Service.Simpl;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.IntPredicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,23 @@ public class UserServiceImpl implements UserService {
 		userRepository.delete(optional.get());
 		return user;
 	}
+
+	@Override
+	public user updateUser(Integer userId, user user ) throws Exception{
+
+	Optional<user> optional = userRepository.findById(userId);
+	if(optional.isPresent()) {
+	user temp = optional.get();
+	temp.setFirstName(user.getFirstName());
+	temp.setLastName(user.getLastName());
+	temp.setUserName(user.getUserName());
+	temp.setRole(user.getRole());
+	temp.setPassword(user.getPassword());
+
+	userRepository.save(temp);
+	}
+	return user;
+	}
+
 
 }

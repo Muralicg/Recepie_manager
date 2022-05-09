@@ -57,13 +57,13 @@ public class IngredientTest {
 	@Test
 	void TestGetIngredient() throws Exception{
 		Ingredient ingredient = getIngredients();
-		System.out.println(ingredient.toString());
+		//System.out.println(ingredient.toString());
 		//System.out.println(ingredientService.getIngredient(9));
-		ingredientRepository.save(ingredient);
-		ingredientService.addIngredients(ingredient);
+		//ingredientRepository.save(ingredient);
+		//ingredientService.addIngredients(ingredient);
 		//Integer IngredientId = 9;
 		when(ingredientRepository.findById(9)).thenReturn(Optional.of(ingredient));
-		//assertEquals(ingredient,ingredientService.getIngredient(9));
+		assertEquals(ingredient,ingredientService.getIngredient(9));
 		
 	}
 	
@@ -78,11 +78,11 @@ public class IngredientTest {
 		ingredient.setIngredient(temp);
 		
 		
-		ingredientService.addIngredients(ingredient);
+		//ingredientService.addIngredients(ingredient);
 		
 		when(ingredientRepository.findById(ingredient.getIngredientId())).thenReturn(Optional.of(ingredient));
 		when(ingredientRepository.save(ingredient)).thenReturn(ingredient);
-		//assertThat(ingredientService.updateIngredients(9, ingredient)).isEqualTo(ingredient);
+		assertThat(ingredientService.updateIngredients(9, ingredient)).isEqualTo(ingredient);
 	
 	}
 }
